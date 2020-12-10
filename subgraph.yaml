@@ -1,0 +1,36 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: enj
+    network: mainnet
+    source:
+      address: "0xfaaFDc07907ff5120a76b34b731b278c38d6043C"
+      abi: enj
+      startBlock: 8123880
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - TransferBatch
+        - TransferSingle
+        - URI
+      abis:
+        - name: enj
+          file: ./abis/enj.json
+      eventHandlers:
+        - event: AcceptAssignment(indexed uint256,indexed address)
+          handler: handleAcceptAssignment
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: Assign(indexed uint256,indexed address,indexed address)
+          handler: handleAssign
+        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+          handler: handleTransferBatch
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+        - event: URI(string,indexed uint256)
+          handler: handleURI
+      file: ./src/mapping.ts

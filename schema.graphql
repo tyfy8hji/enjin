@@ -1,0 +1,50 @@
+
+type Asset @entity {
+  "Asset id"
+  id: ID!
+  "Asset value (link)"
+  value: String
+}
+
+type AssetBalance @entity {
+  "Owners address - asset id"
+  id: ID!
+  "Asset"
+  asset: Asset
+  "Balance"
+  count: BigInt
+  "Owners address"
+  assetowner: EthAddress}
+
+
+type EthAddress @entity {
+  "Ethaddress of assets owner"
+  id: ID!
+  "Assets on this address"
+  assets:[AssetBalance!] @derivedFrom(field: "assetowner")
+}
+
+type Transfer @entity {
+  "Tx hash + asset id"
+  id: ID!
+  "From address"
+  from: EthAddress
+  "To address"
+  to: EthAddress
+  "Trasfer opaerator"
+  operator: Bytes
+  "Transferred asser"
+  asset: Asset
+  "Transferred quantity of assets"
+  value: BigInt
+}
+
+type Counter @entity {
+  id: ID!
+  "Overall quantity of assets"
+  assetscounter: BigInt
+  "Overall quantity of transfers"
+  transferscounter: BigInt
+  "Overall quantity of addresses"
+  addressescounter: BigInt
+}
