@@ -21,12 +21,6 @@ dataSources:
         - name: enj
           file: ./abis/enj.json
       eventHandlers:
-        - event: AcceptAssignment(indexed uint256,indexed address)
-          handler: handleAcceptAssignment
-        - event: ApprovalForAll(indexed address,indexed address,bool)
-          handler: handleApprovalForAll
-        - event: Assign(indexed uint256,indexed address,indexed address)
-          handler: handleAssign
         - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
           handler: handleTransferBatch
         - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
