@@ -11,7 +11,6 @@ import { Asset, EthAddress,Transfer, Counter,AssetBalance } from "../generated/s
 export function handleTransferBatch(event: TransferBatch): void {
   var ids=event.params._ids
   var vals=event.params._values
-  var ind=BigInt.fromI32(0)
   for (let i=0;i<event.params._ids.length;i++)
   {
     let val=vals[i]
